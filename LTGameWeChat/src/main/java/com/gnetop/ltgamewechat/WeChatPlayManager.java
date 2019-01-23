@@ -2,9 +2,9 @@ package com.gnetop.ltgamewechat;
 
 import android.content.Context;
 
-import com.gnetop.ltgamecommon.impl.OnPayResultedListener;
+import com.gnetop.ltgamecommon.impl.OnPlayResultedListener;
 import com.gnetop.ltgamecommon.login.LoginBackManager;
-import com.gnetop.ltgamecommon.model.AliPayBean;
+import com.gnetop.ltgamecommon.model.AliPlayBean;
 import com.gnetop.ltgamecommon.model.WeChatBean;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -12,35 +12,35 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.WeakHashMap;
 
-public class WeChatPayManager {
+public class WeChatPlayManager {
 
 
     /**
      * 微信支付
      */
-    public static void weChatPay(Context context, String url, String appID,
+    public static void weChatPlay(Context context, String url, String appID,
                                    WeakHashMap<String, String> params) {
         final IWXAPI api = WXAPIFactory.createWXAPI(context, null);
         // 将该app注册到微信
         api.registerApp(appID);
-        LoginBackManager.weChatPay(url, params, new OnPayResultedListener() {
+        LoginBackManager.weChatPlay(url, params, new OnPlayResultedListener() {
             @Override
-            public void onPayError(Throwable ex) {
+            public void onPlayError(Throwable ex) {
 
             }
 
             @Override
-            public void onPayComplete() {
+            public void onPlayComplete() {
 
             }
 
             @Override
-            public void onAliPayResult(AliPayBean result) {
+            public void onAliPlayResult(AliPlayBean result) {
 
             }
 
             @Override
-            public void onWeChatPayResult(WeChatBean mBean) {
+            public void onWeChatPlayResult(WeChatBean mBean) {
                 PayReq req = new PayReq();
                 req.appId = mBean.getAppid();
                 req.partnerId = mBean.getPartnerid();
